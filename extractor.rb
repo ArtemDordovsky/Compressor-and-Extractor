@@ -2,8 +2,8 @@ class Extractor
 
   def initialize(words, position)
     @text = ""
-    @word_array = File.open(words){ |f| f.read }.split || []
-    @position_array = File.open(position){ |f| f.read }.split || []
+    @word_array = from_file(words)
+    @position_array = from_file(position)
   end
 
   def execute
@@ -15,6 +15,10 @@ class Extractor
   end
 
   private
+
+  def from_file(file)
+     File.open(file){ |f| f.read }.split || []
+  end
 
   def to_file
     File.open("text_new.txt", "w") do |f|
